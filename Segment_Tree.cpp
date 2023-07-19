@@ -232,3 +232,57 @@ class segtree {
 
 
 //===============================================================================================
+//===============================================================================================
+template <typename T>
+class SegTree {
+public:
+    vector<T> tree;
+    T zero; // Neutral element
+
+    SegTree (int sz) {
+        tree.resize(4*sz+1);
+    }
+
+    T combine (T &a, T &b) {
+        return a + b; // Combine function
+    }
+
+    void build (int id, int segl, int segr, vector<T> &v) {
+        if (segl == segr) {
+            tree[id] = v[segl];
+            return;
+        }
+        int mid = (segl + segr)/2;
+        build(2*id + 1, segl, mid, v);
+        build(2*id + 2, mid+1, segr, v);
+        tree[id] = combine(tree[2*id+1], tree[2*id+2]);
+    }
+
+    void modify (int pos, T val, int id, int segl, int segr) {
+        if (segl == segr) {
+            tree[id] = val;
+            return;
+        }
+        int mid = (segl + segr)/2;
+        if (pos>mid) {
+            modify(pos, val, 2*id+2, mid+1, segr);
+        }
+        else {
+            modify(pos, val, 2*id+1, segl, mid);
+        }
+        tree[id] = combine(tree[2*id+1], tree[2*id+2]);
+    }
+
+    T query (int l, int r, int id, int segl, int segr) {
+        if (l>segr || segl>r) {
+            return zero;
+        }
+        if (segl>=l && segr<=r) {
+            return tree[id];
+        }
+        int mid = (segl + segr)/2;
+        T leftVal = query(l, r, 2*id+1, segl, mid);
+        T rightVal = query(l, r, 2*id+2, mid+1, segr);
+        return combine(leftVal, rightVal);
+    }
+};
