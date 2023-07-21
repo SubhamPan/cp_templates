@@ -353,14 +353,14 @@ struct Segtree{
     }
 //================================================================
 //Update package==================================================
-    T apply(T curr, ll val)
+    T apply(T curr, T val)
     {
         // change this function if update is of some other kind.
         T ans = curr;
         ans = val;
         return ans;
     }
-    void updateUtil(ll v, ll tl, ll tr, ll ind, ll val)
+    void updateUtil(ll v, ll tl, ll tr, ll ind, T val)
     {
         if(tl == tr)
         {
@@ -378,7 +378,7 @@ struct Segtree{
         }
         st[v] = combine(st[2*v + 1], st[2*v+2]);
     }
-    void update(ll ind, ll val)
+    void update(ll ind, T val)
     {
         updateUtil(0,0,n-1,ind,val);
     }
