@@ -311,10 +311,13 @@ struct Segtree{
         T ans = l + r;
         return ans;
     }
+//Build Package===================================================
     void buildUtil(ll v, ll tl, ll tr, vector<T>&a)
     {
         if(tl == tr)
         {
+	    //Setting up the bottom layer of the segtree. 
+	    //[the default one is just keeping the array elements as the bottom layer]
             st[v] = a[tl];
             return;
         }
@@ -328,6 +331,8 @@ struct Segtree{
         assert(sz(a) == n);
         buildUtil(0,0,n-1,a);
     }
+//===============================================================
+//Query Package==================================================
     T queryUtil(ll v, ll tl, ll tr, ll l, ll r)
     {
         if(l > r)return identity_element;
@@ -346,6 +351,8 @@ struct Segtree{
     {
         return queryUtil(0,0,n-1,l,r);
     }
+//================================================================
+//Update package==================================================
     T apply(T curr, ll val)
     {
         // change this function if update is of some other kind.
@@ -375,6 +382,7 @@ struct Segtree{
     {
         updateUtil(0,0,n-1,ind,val);
     }
+//==============================================================
 };
 
 
