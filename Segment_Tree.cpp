@@ -292,8 +292,8 @@ public:
 
 //===============================================================================================
 //===============================================================================================
-//Sharmaharisam's template
- 
+
+//select T and identity_element carefully after some thought.
 template<class T>
 struct Segtree{
     vector<T>st;
