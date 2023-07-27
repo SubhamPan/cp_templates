@@ -1,3 +1,4 @@
+
 class DSU {
 public:
     int n;
@@ -17,7 +18,7 @@ public:
         return p[x] = find(p[x]);
     }
 
-    void unite(int a, int b) {
+    void merge(int a, int b) {
         int c = find(a);
         int d = find(b);
         if(d!=c) {
@@ -25,7 +26,17 @@ public:
 
             p[d] = c;
             sz[c] += sz[d];
+        } else{
+            //you made a cycle by including this edge a-b.
         }
+    }
+
+    bool same(int x, int y) {
+        return find(x)==find(y);
+    }
+
+    int size(int x) {
+        return sz[find(x)];
     }
 
 };
