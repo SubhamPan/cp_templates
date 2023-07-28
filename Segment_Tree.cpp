@@ -292,7 +292,7 @@ public:
 
 //===============================================================================================
 //===============================================================================================
-
+//SharmaHariSam's template - the one i liked the most so far, and the one im using.
 //select T and identity_element carefully after some thought.
 template<class T>
 struct Segtree{
