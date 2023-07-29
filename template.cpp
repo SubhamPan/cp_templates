@@ -1,8 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+
+#ifndef ONLINE_JUDGE
+    // #include </mnt/d/CC/Debug.h> 
+    #include <C:\Users\pansu_kpr6duo\OneDrive\Desktop\code\Debug.h.txt>
+#else
+  #define debug(x...)
+#endif
  
 // #define ll long long int
 using ll = long long;
+using ld = long double;
+
+#define int long long
+#define double long double
+
 //for tp
 #define SubhamPan ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
 //it doesnt matter v,t,a; u can use all(a) or vin(v) or anything.
@@ -28,22 +41,6 @@ using ll = long long;
 #define pow2(x) (1ll<<(x))
 
 
-#define lb lower_bound
-#define ub upper_bound
- 
-typedef vector<int> vi;
-typedef vector<ll> vl;
-
-typedef vector<vector<int>> vvi; // vvi a(n, vi (m, 0));
-typedef vector<vector<ll>> vvl;
-
-typedef vector<pair<int,int>> vpii;
-typedef vector<pair<ll, ll>> vpll;
-
-typedef pair<int,int> pii;
-typedef pair<ll, ll> pll;
-
-
 //use the following in solve
 #define meh {cout<<"NO"<<endl;return;}
 #define yay {cout<<"YES"<<endl;return;}
@@ -53,13 +50,12 @@ typedef pair<ll, ll> pll;
 #define IMyay {cout<<"YES"<<endl;continue;}
 
 //debugging uses:========================================------------------------------------------------------
-typedef long double ld;
-void print(ll t) {cout << t;}
+// void print(ll t) {cout << t;}
 void print(int t) {cout << t;}
 void print(string t) {cout << t;}
 void print(char t) {cout << t;}
 void print(double t) {cout << t;}
-void print(ld t) {cout << t;}
+// void print(ld t) {cout << t;}
  
 template <class T, class V> void print(pair <T, V> p);
 template <class T> void print(vector <T> v);
@@ -76,11 +72,13 @@ template <class T, class V> void print(map <T, V> v) {cout << "[ "; for (auto i 
 
 template <typename T, typename U>
 T cdiv(T x, U y) {
-  return (x > 0 ? (x + y - 1) / y : x / y);
+    assert(y!=0);
+    return (x > 0 ? (x + y - 1) / y : x / y);
 }
 template <typename T, typename U>
 T fdiv(T x, U y) {
-  return (x > 0 ? x / y : (x - y + 1) / y);
+    assert(y!=0);
+    return (x > 0 ? x / y : (x - y + 1) / y);
 }
 
 template <typename T>
@@ -88,12 +86,30 @@ int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 } //sgn(x) gives -1/0/1
 
-// const int MAX = 200007; 
+
+long long sqroot(long long a){
+    long long b = (long long) sqrtl(a);
+    if ((b + 1) * (b + 1) == a){
+        b++;
+    }
+    return b;
+}
+
+constexpr ll inf = 1E18;
+long long raise(long long a, long long b) {
+    long long res = 1;
+    for(int i = 0; i<b; i++) {
+        if(inf/res < a) return 0;
+        res *= a;
+    }
+    return res;
+}
+
+const int MAX = 200007; 
 // const int MOD = 1e9+7; //comment it out if u want to use the other MOD
 // // const int MOD = 998244353;
 // const double EPS=1E-6;
 // const int MAXN = 1000010;
-constexpr ll inf = 1E18;
 //=================================================================
 
 //mint paste here (if necessary)
@@ -115,7 +131,7 @@ void solve() {
 }
 
 /*ngu*/
-int main() {
+int32_t main() {
     SubhamPan
 
     
