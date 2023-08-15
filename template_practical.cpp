@@ -23,7 +23,7 @@ template <class T> void print(vector <T> v);
 template <class T> void print(set <T> v);
 template <class T, class V> void print(map <T, V> v);
 template <class T> void print(multiset <T> v);
-template <class T, class V> void print(pair <T, V> p) {cout << "{"; print(p.f); cout << ","; print(p.s); cout << "}";}
+template <class T, class V> void print(pair <T, V> p) {cout << "{"; print(p.first); cout << ","; print(p.second); cout << "}";}
 template <class T> void print(vector <T> v) {cout << "[ "; for (T i : v) {print(i); cout << " ";} cout << "]\n";}
 template <class T> void print(set <T> v) {cout << "[ "; for (T i : v) {print(i); cout << " ";} cout << "]\n";}
 template <class T> void print(multiset <T> v) {cout << "[ "; for (T i : v) {print(i); cout << " ";} cout << "]\n";}
@@ -39,7 +39,7 @@ constexpr ll inf = 1E18;
 //(raise(a,b) = a^b)
 long long raise(long long a, long long b) {long long res = 1;for(int i = 0; i<b; i++) {if(inf/res < a) return 0;res *= a;}return res;}
 //=======================================================----------------------------------
-const int MAX = 200007; 
+const int MAX = 200007; //2*10^5 + 7
 // const int MOD = 1e9+7; //comment it out if u want to use the other MOD
 // // const int MOD = 998244353;
 // const double EPS=1E-6;
@@ -48,13 +48,13 @@ const int MAX = 200007;
 
 
 
-
-
 void solve() {
 
+
     
     
 
+    // cout<<"===="<<endl;
 
 }
 
