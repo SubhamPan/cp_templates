@@ -1,3 +1,4 @@
+
 //==================================================================
 
 //modular arithmetic for MOD type questions code below:
@@ -28,7 +29,7 @@ T power(T a, ll b) {
 struct Z {
     int x;
     Z(int x = 0) : x(norm(x)) {}
-    Z(ll x) : x(norm((int)(x % P))) {}
+    // Z(ll x) : x(norm((int)(x % P))) {} //uncomment this line if there is no #define int long long
     int val() const {
         return x;
     }
@@ -130,7 +131,7 @@ struct Z {
 //if u do Z%2, be sure to change P to 1000000000.
 //===========================================================
 
-Z fac[100005];
+Z fac[200005];
 
 Z NcRmodPFermat(int n, int r) {
     if(n<r) {return 0;}
@@ -141,5 +142,10 @@ Z NcRmodPFermat(int n, int r) {
     return fac[n]/(fac[r]*fac[n-r]);
 }
 
-
+    //put this in int main
+    fac[0] = 1; fac[1] = 1; fac[2] = 2;
+    for(int i = 3; i < 200005; i++) {
+        fac[i] = fac[i-1]*i;
+    }
 //===========================================================
+//======================================================================
