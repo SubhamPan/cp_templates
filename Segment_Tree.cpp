@@ -293,97 +293,87 @@ public:
 //===============================================================================================
 //===============================================================================================
 //SharmaHariSam's template - the one i liked the most so far, and the one im using.
+
 //select T and identity_element carefully after some thought.
 template<class T>
 struct Segtree{
     vector<T>st;
     ll n;
     T identity_element;
-    Segtree(ll n, T identity_element)
-    {
+
+    Segtree(ll n, T identity_element) {
         this->n = n;
         this->identity_element = identity_element;
         st.assign(4*n,identity_element);
     }
-    T combine(T l, T r)
-    {
+    
+    T combine(T l, T r) {
         // change this function as required.
         T ans = l + r;
         return ans;
     }
 //Build Package===================================================
-    void buildUtil(ll v, ll tl, ll tr, vector<T>&a)
-    {
-        if(tl == tr)
-        {
-	    //Setting up the bottom layer of the segtree. 
-	    //[the default one is just keeping the array elements as the bottom layer]
+    void buildUtil(ll v, ll tl, ll tr, vector<T>&a) {
+        if(tl == tr) {
+        //Setting up the bottom layer of the segtree. 
+        //[the default one is just keeping the array elements as the bottom layer]
             st[v] = a[tl];
             return;
         }
+        
         ll tm = (tl + tr)>>1;
         buildUtil(2*v + 1, tl, tm,a);
         buildUtil(2*v + 2,tm+1,tr,a);
         st[v] = combine(st[2*v + 1], st[2*v + 2]);
     }
-    void build(vector<T>a)
-    {
+    void build(vector<T>a) {
         assert(sz(a) == n);
         buildUtil(0,0,n-1,a);
     }
 //===============================================================
 //Query Package==================================================
-    T queryUtil(ll v, ll tl, ll tr, ll l, ll r)
-    {
+    T queryUtil(ll v, ll tl, ll tr, ll l, ll r) {
         if(l > r)return identity_element;
-        if(r < tl or l > tr)
-        {
+        if(r < tl or l > tr) {
             return identity_element;
         }
-        if(tl >= l and tr <= r)
-        {
+        if(tl >= l and tr <= r) {
             return st[v];
         }
         ll tm = (tl + tr)>>1;
         return combine(queryUtil(2*v+1,tl,tm,l,r), queryUtil(2*v+2,tm+1,tr,l,r));
     }
-    T query(ll l, ll r)
-    {
+    T query(ll l, ll r) {
         return queryUtil(0,0,n-1,l,r);
     }
 //================================================================
 //Update package==================================================
-    T apply(T curr, T val)
-    {
+    T apply(T curr, T val) {
         // change this function if update is of some other kind.
         T ans = curr;
         ans = val;
         return ans;
     }
-    void updateUtil(ll v, ll tl, ll tr, ll ind, T val)
-    {
-        if(tl == tr)
-        {
+    void updateUtil(ll v, ll tl, ll tr, ll ind, T val) {
+        if(tl == tr) {
             st[v] = apply(st[v],val);
             return;
         }        
         ll tm = (tl + tr)>>1;
-        if(ind <= tm)
-        {
+
+        if(ind <= tm) {
             updateUtil(2*v+1,tl,tm,ind,val);
-        }
-        else
-        {
+        } else {
             updateUtil(2*v+2,tm+1,tr,ind,val);
         }
         st[v] = combine(st[2*v + 1], st[2*v+2]);
     }
-    void update(ll ind, T val)
-    {
+    void update(ll ind, T val) {
         updateUtil(0,0,n-1,ind,val);
     }
 //==============================================================
 };
+
 
 
 //===============================================================================================
