@@ -327,7 +327,7 @@ struct Segtree{
         st[v] = combine(st[2*v + 1], st[2*v + 2]);
     }
     void build(vector<T>a) {
-        assert(sz(a) == n);
+        assert(a.size() == n);
         buildUtil(0,0,n-1,a);
     }
 //===============================================================
