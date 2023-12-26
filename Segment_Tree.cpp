@@ -295,6 +295,7 @@ public:
 //SharmaHariSam's template - the one i liked the most so far, and the one im using.
 
 //select T and identity_element carefully after some thought.
+//tl is segl, tr is segr
 template<class T>
 struct Segtree{
     vector<T>st;
@@ -337,8 +338,8 @@ struct Segtree{
         if(r < tl or l > tr) {
             return identity_element;
         }
-        if(tl >= l and tr <= r) {
-            return st[v];
+        if(l <= tl and tr <= r) {
+            return st[v]; //st[v] stores sum from [tl, tr].
         }
         ll tm = (tl + tr)>>1;
         return combine(queryUtil(2*v+1,tl,tm,l,r), queryUtil(2*v+2,tm+1,tr,l,r));
@@ -372,7 +373,36 @@ struct Segtree{
         updateUtil(0,0,n-1,ind,val);
     }
 //==============================================================
+    
+    // CUSTOM - reference to make your own custom
+    // if it is returning something, function will be of return type T
+    //recall that st[v] stores the sum of [tl, tr] of v. it stores sum in this default segtree, you can change what it stores by editing combine
+    // first get the base case out of the way (tl == tr); 
+    // then try thinking about which subtree (left? or right?) you will choose (and why) when you are coming downwards from the root node to do this custom process.
+
+
+    // finding the rightmost index where sum[ind, n] == val
+    T findUtil(int v, int tl, int tr, T val) {
+        if(tl == tr) {
+            if(st[v] == val) {
+                return tl;
+            } else {
+                return -1;
+            }
+        }
+        int tm = (tl + tr) / 2;
+        if(st[2*v + 2] >= val) { //right subtree sum >= val -> check in the right subtree
+            return findUtil(2*v+2, tm+1, tr, val);
+        } else {
+            return findUtil(2*v+1, tl, tm, val - st[2*v + 2]); //look for (val - right half sum) in left subtree
+        }
+    }
+
+    T find(T val) {
+        return findUtil(0, 0, n-1, val);
+    }
 };
+
 
 
 
