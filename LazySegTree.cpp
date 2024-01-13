@@ -19,7 +19,7 @@ class lsegtree{
 	int base = 1;
 	vector<node> tree;
 	lsegtree(vector<T> a){
-		int _n = len(a);
+		int _n = (int)a.size();
 		while(base < _n) base*=2;
 		tree.resize(2*base);
 		for(int i = 0; i < _n; i++) {
