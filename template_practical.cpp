@@ -1,10 +1,12 @@
+////------------> FLS.
 #include <bits/stdc++.h>
 using namespace std;
 
 using ll = long long; using ld = long double;
 #define int long long
 #define double long double
-#define SubhamPan ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
+#define endl '\n'
+#define FLS ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
 #define vin(a) for(auto&XX:a)cin>>XX;//idk y but it restricts my thought process at times
 #define vout(v) for (auto XX: v)cout<<XX<<' ';cout<<endl;
 #define vvin(a) for(auto& b : a) {for(auto& x : b) cin>>x;}
@@ -36,20 +38,20 @@ template <typename T> int sgn(T val) {return (T(0) < val) - (val < T(0));} //sgn
 //returns integer, only works if a is a guarantee perfect square
 long long sqroot(long long a){long long b = (long long) sqrtl(a);if ((b + 1) * (b + 1) == a){b++;}return b;}
 constexpr ll inf = 1E18;
-//(raise(a,b) = a^b)
+//(raise(a,b) = a^b) [a,b > 0].
 long long raise(long long a, long long b) {long long res = 1;for(int i = 0; i<b; i++) {if(inf/res < a) return 0;res *= a;}return res;}
+bool isSquare(int n) {int r = sqrtl(1.0L * n);return r*r == n;}
 //=======================================================----------------------------------
 const int MAX = 200007; //2*10^5 + 7
-// const int MOD = 1e9+7; //comment it out if u want to use the other MOD
+const int mod = 1000000007; //1e9+7, comment it out if u want to use the other MOD
 // // const int MOD = 998244353;
-// const double EPS=1E-6;
+// const double EPS=1E-9;
 // const int MAXN = 10000010; //1e7+10
 //----------------
 
 
 
 void solve() {
-
 
     
     
@@ -58,10 +60,13 @@ void solve() {
 
 }
 
-/*ngu*/
+/*ngu, lesgo*/
 int32_t main() {
-    SubhamPan
+    FLS
     //cout<<fixed<<setprecision(20)<<x; //-> for printing a double 'x'.
+
+    // freopen("", "r", stdin);
+    // freopen("", "w", stdout);
     
     int TT=1;
     cin>>TT; //comment out this line if only 1 test case is needed
