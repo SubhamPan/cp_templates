@@ -2,7 +2,7 @@
 
     // vector<vector<int>> tree(n+1) // adjacency matrix; replace tree with adj / g.
     vector<int> depth(n+1, 0);
-    vector<vector<int>> ancestor(n+1, vector<int>(20, 0));
+    vector<vector<int>> ancestor(n+1, vector<int>(20, 0)); // assuming there will be (2^20) levels in the tree.
  
     function<void(int, int)> depthassign = [&](int v, int par) {
         depth[v] = depth[par] + 1;
