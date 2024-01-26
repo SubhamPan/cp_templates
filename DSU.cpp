@@ -1,7 +1,7 @@
-
+// DSU dsu(n+1);
 class DSU {
 public:
-    int n;
+    int n; // check whether you inputted n or n+1 as argument in dsu.
     //p is parents vector, sz is size vector
     vector<int> p, sz;
 
