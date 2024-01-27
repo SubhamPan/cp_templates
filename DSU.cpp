@@ -13,14 +13,14 @@ public:
         sz.resize(n, 1);
     }
 
-    int find(int x) {
+    int get_top(int x) {
         if(x==p[x]) return x;
-        return p[x] = find(p[x]);
+        return p[x] = get_top(p[x]);
     }
 
     void merge(int a, int b) {
-        int c = find(a);
-        int d = find(b);
+        int c = get_top(a);
+        int d = get_top(b);
         if(d!=c) {
             if(sz[c] < sz[d]) swap(c,d);
 
@@ -32,11 +32,11 @@ public:
     }
 
     bool same(int x, int y) {
-        return find(x)==find(y);
+        return get_top(x)==get_top(y);
     }
 
     int size(int x) {
-        return sz[find(x)];
+        return sz[get_top(x)];
     }
 
 };
