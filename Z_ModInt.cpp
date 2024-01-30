@@ -129,6 +129,7 @@ struct Z {
 //Z fact[100005];
 //u get the point ig, Z is a new datatype like int.
 //if u do Z%2, be sure to change P to 1000000000.
+// CHANGE P and NN whenever required!!!!
 //===========================================================
 
 Z fac[200005];
