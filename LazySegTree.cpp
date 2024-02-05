@@ -200,3 +200,110 @@ struct Lsegtree{
         updateUtil(0,0,n-1,l,r,upd);
     }
 };
+
+
+
+//------------------------------------------------
+// SirBruce's lazy segtree template:
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define INF 1e18
+
+template<typename T>
+class Segtree{
+    int n;
+    vector<T> a;
+    vector<T> lazy;
+    T zero = INF;
+    T combine(T x,T y)
+    {
+        return min(x,y);
+    }
+    void push(int i,int tl,int tr)
+    {
+        int tm=(tl+tr)/2;
+        lazy[2*i] += lazy[i];
+        lazy[2*i+1] += lazy[i];
+        a[2*i] += lazy[i];
+        a[2*i+1] += lazy[i];
+        lazy[i] = 0;
+    }
+    public:
+
+    Segtree(int n):n(n)
+    {
+        a.resize(4*n+1,0);
+        lazy.resize(4*n+1,0);
+    }
+
+    void build(vector<T> &v,int i,int tl,int tr)
+    {
+        if(tl==tr)
+        {
+            a[i]=v[tl];
+            return;
+        }
+        int tm=(tl+tr)/2;
+        build(v,2*i,tl,tm);
+        build(v,2*i+1,tm+1,tr);
+        a[i]=combine(a[2*i],a[2*i+1]);
+    }  
+
+    void update(int i,int tl,int tr,int l,int r,T val)
+    {
+        if(tl>r||tr<l)return;
+        if(tl>=l&&tr<=r)
+        {
+            lazy[i] += val;
+            a[i] += val;
+            return;
+        }
+        push(i,tl,tr);
+        int tm=(tl+tr)/2;
+        update(2*i,tl,tm,l,r,val);
+        update(2*i+1,tm+1,tr,l,r,val);
+        a[i]=combine(a[2*i],a[2*i+1]);
+    }
+
+    T query(int i,int tl,int tr,int l,int r)
+    {
+        if(tl>r||tr<l)return zero;
+        if(tl>=l&&tr<=r)
+        {
+            return a[i];
+        }
+        push(i,tl,tr);
+        int tm=(tl+tr)/2;
+        return combine(query(2*i,tl,tm,l,r),query(2*i+1,tm+1,tr,l,r));
+    }
+
+};
+
+int32_t main()
+{
+    cin.tie(0);cout.tie(0);ios::sync_with_stdio(false);
+    int n,q;
+    cin >> n >> q;
+    vector<int> v(n);
+    Segtree<int> st(n);
+    st.build(v,1,0,n-1);
+    while(q--)
+    {
+        int type;
+        cin >> type;
+        if(type==1)
+        {
+            int l,r,val;
+            cin >> l >> r >> val;
+            st.update(1,0,n-1,l,r-1,val);
+        }
+        else
+        {
+            int l,r;
+            cin >> l >> r;
+            cout << st.query(1,0,n-1,l,r-1) << '\n';
+        }
+    }
+    
+}
