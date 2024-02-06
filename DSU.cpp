@@ -1,10 +1,10 @@
 // DSU dsu(n+1);
 class DSU {
 public:
-    int n; // check whether you inputted n or n+1 as argument in dsu.
+    int n;
     //p is parents vector, sz is size vector
     vector<int> p, sz;
-
+ 
     //constructor initializing DSU object with given number of elements '_n'
     DSU(int _n) : n(_n) {
         p.resize(n);
@@ -12,31 +12,33 @@ public:
         //so effectively intializing each element as its own parent
         sz.resize(n, 1);
     }
-
-    int get_top(int x) {
+ 
+    int find(int x) {
         if(x==p[x]) return x;
-        return p[x] = get_top(p[x]);
+        return p[x] = find(p[x]);
     }
-
-    void merge(int a, int b) {
-        int c = get_top(a);
-        int d = get_top(b);
+ 
+    bool merge(int a, int b) { // returns false if a cycle will get created; returns true if normal merge took place.
+        int c = find(a);
+        int d = find(b);
         if(d!=c) {
             if(sz[c] < sz[d]) swap(c,d);
-
+ 
             p[d] = c;
             sz[c] += sz[d];
+            return true;
         } else{
             //you made a cycle by including this edge a-b.
+            return false;
         }
     }
-
+ 
     bool same(int x, int y) {
-        return get_top(x)==get_top(y);
+        return find(x)==find(y);
     }
-
+ 
     int size(int x) {
-        return sz[get_top(x)];
+        return sz[find(x)];
     }
-
+ 
 };
