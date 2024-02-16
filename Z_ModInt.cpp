@@ -1,6 +1,3 @@
-
-//==================================================================
-
 //modular arithmetic for MOD type questions code below:
 
 
@@ -131,10 +128,10 @@ struct Z {
 //if u do Z%2, be sure to change P to 1000000000.
 // CHANGE P and NN whenever required!!!!
 //===========================================================
+const int NN = 200005; //2e5
+Z fac[NN];
 
-Z fac[200005];
-
-Z NcRmodPFermat(int n, int r) {
+Z NcR(int n, int r) {
     if(n<r) {return 0;}
     if(r==0) {return 1;}
 
@@ -143,12 +140,25 @@ Z NcRmodPFermat(int n, int r) {
     return fac[n]/(fac[r]*fac[n-r]);
 }
 
+// dont go for the factorial array method in this question,
+// since we may require a factorial of a very big number. Do this instead:
+Z NcR_slow(int n, int r) {
+    if(n < r) {return 0;}
+    Z prod = 1;
+    for(int i = 0; i < r; i++) {
+        prod *= (n-i);
+        prod /= (i+1);
+    }
+    return prod;
+}
+
     //put this in int main
     fac[0] = 1; fac[1] = 1; fac[2] = 2;
-    for(int i = 3; i < 200005; i++) {
+    for(int i = 3; i < NN; i++) {
         fac[i] = fac[i-1]*i;
     }
 //===========================================================
-//======================================================================
+//===============================================================================
+
 
 https://codeforces.com/contest/1629/submission/239823737
