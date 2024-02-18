@@ -76,3 +76,20 @@ int32_t main() {
  
     return 0;
 }
+
+
+
+
+/*
+
+
+Chhoo lo jo mujhe tum kabhi
+Kho na jaun main raat-din
+Nazaron mein tum ho base
+
+Kehdo jo tum ek baar
+Mere ho bas tum mere
+Nazaron mein tum ho base
+
+
+*/
