@@ -29,3 +29,4 @@ struct DisjointSetWithRollback {
 };
 
 // https://codeforces.com/contest/1681/submission/159596854
+// https://codeforces.com/contest/1681/submission/252078939 -> [my submission for the saame question]
