@@ -1,40 +1,42 @@
+
 // shadow orz
 vector<int> manacher_odd(string s){
-	int n = s.size();
-	s = "$" + s + "^";
-	vector<int> p(n + 2);
-	int l = 1, r = 1;
-	for(int i = 1; i <= n; i++) {
-		p[i] = max(0, min(r - i, p[l + (r - i)]));
-		while(s[i - p[i]] == s[i + p[i]]) {
-			p[i]++;
-		}
-		if(i + p[i] > r) {
-			l = i - p[i], r = i + p[i];
-		}
-	}
-	return vector<int>(begin(p) + 1, end(p) - 1);
+    int n = s.size();
+    s = "$" + s + "^";
+    vector<int> p(n + 2);
+    int l = 1, r = 1;
+    for(int i = 1; i <= n; i++) {
+        p[i] = max(0LL, min(r - i, p[l + (r - i)]));
+        while(s[i - p[i]] == s[i + p[i]]) {
+            p[i]++;
+        }
+        if(i + p[i] > r) {
+            l = i - p[i], r = i + p[i];
+        }
+    }
+    return vector<int>(begin(p) + 1, end(p) - 1);
 }
 pair<vector<int>,vector<int>> manacher(string s){
-	string t;
-	for(auto c: s) {
-		t += string("#") + c;
-	}
-	auto res = manacher_odd(t + "#");
-	res = vector<int>(begin(res) + 1, end(res) - 1);
-	vector<int> d1(s.size()),d2(s.size());
-	for(int i = 0; i < (int)s.size(); i++){
-		d1[i] = res[2*i] / 2;
-		if(i){
-			d2[i] = (res[2*i - 1] - 1) / 2;
-		}
-	}
-	return {d1,d2};
+    string t;
+    for(auto c: s) {
+        t += string("#") + c;
+    }
+    auto res = manacher_odd(t + "#");
+    res = vector<int>(begin(res) + 1, end(res) - 1);
+    vector<int> d1(s.size()),d2(s.size());
+    for(int i = 0; i < (int)s.size(); i++){
+        d1[i] = res[2*i] / 2;
+        if(i){
+            d2[i] = (res[2*i - 1] - 1) / 2;
+        }
+    }
+    return {d1,d2};
 }
 /*
 d1[i] = number of odd-length palindromes centered at i
 d2[i] = number of even-length palindromes centered at (i-1,i)
- 
+// [not exactly number, check the is_palin lamda function for more clarity]
+
 Example
 s = a {b a _b_ a b} c
  
@@ -45,6 +47,55 @@ s = c {b a _a_ b} d
 d2[3] = 2
 */
 
+// EXample usage:
+// split a string s into substrings that are not palindromes.
+
+void solve() {
+
+    string s; cin >> s;
+    int n = s.size();
+
+    auto [d1, d2] = manacher(s);
+
+    auto is_palin = [&](int L, int R) -> bool {
+        // substr = [L, R] (both inclusive).
+        int len = (R - L + 1);
+        int center = (L + R + 1) / 2;
+
+        if(len % 2 == 1) {
+            int mx_pal_len = (2 * d1[center]) - 1;
+            return len <= mx_pal_len;
+        } else {
+            int mx_pal_len = (2 * d2[center]);
+            return len <= mx_pal_len;
+        }
+    };
+
+
+    if(is_palin(0, n-1) == false) {
+        cout << "YES" << endl;
+        cout << 1 << endl;
+        cout << s << endl;
+        return;
+    }
+
+    for(int i = 0; i < n-1; i++) {
+        // i is ending point of first substr
+        if(is_palin(0, i) == true || is_palin(i+1, n-1) == true) {
+            continue;
+        }
+
+        cout << "YES" << endl;
+        cout << 2 << endl;
+        cout << s.substr(0, i+1) << " " << s.substr(i+1, n - (i+1)) << endl;
+        return;
+    }
+
+    cout << "NO" << endl;
+    
+    // cout<<"===="<<endl;
+
+}
 
 
 
