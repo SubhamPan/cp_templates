@@ -1,7 +1,8 @@
 
-// Example usage: https://codeforces.com/contest/1970/submission/259665402
+// Example usage: https://codeforces.com/contest/1970/submission/261025104
 
 
+ 
 template <typename T>
 class Mat
 {
@@ -31,13 +32,17 @@ public:
         }
         return res;
     }
- 
+    
+    // power/expoenetiation - (base matrix raised to the power e)
     Mat operator^(int e)
     {
         Mat res(n, m);
         for (int i = 0; i < n; i++)
             res.mat[i][i] = 1;
+ 
         Mat base = *this;
+ 
+        // binary exponentiation concept:
         while (e)
         {
             if (e & 1)
@@ -48,3 +53,4 @@ public:
         return res;
     }
 };
+ 
