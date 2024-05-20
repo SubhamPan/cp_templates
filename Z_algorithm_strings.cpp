@@ -22,3 +22,5 @@ vector<int> z_function(string s) {
     z[0] = n;
     return z;
 }
+
+// https://codeforces.com/contest/1968/submission/261762556
