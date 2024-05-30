@@ -17,6 +17,11 @@ clear(): Clears the contents of the data structure.
 https://codeforces.com/contest/1936/submission/248919814
 */  
 
+// with the smartset (or rather smart-multiset), you can:
+// insert, erase (just like a normal multiset)
+// but you can also ask for the [sum] of the [smallest / biggest] 'k' elements in the multiset in O(log n).
+// [sum] and [smallest/biggest] can be modified according to our needs.
+
 template<typename T> struct SmartSet {
 	multiset<T> big, small;
 	T sumBig, sumSmall;
@@ -52,6 +57,8 @@ template<typename T> struct SmartSet {
 			sumBig += x;
 		}
 	}
+
+	// erase only erases ONE particular occurrence of 'x' from the smartset
 	void erase(T x) {
 		if (big.find(x) != big.end()) {
 			big.erase(big.find(x));
