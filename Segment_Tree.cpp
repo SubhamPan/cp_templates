@@ -16,6 +16,7 @@ struct SegTree {
 		Node res;
 		res.x = a.x + b.x;
 		// if you add an attribute to 'node' (say cnt or prop), you might want to update res.cnt / res.prop as well!
+		// if you dont want the combined node to have a prop of its own, you can assign res.prop to the default prop value that indicates no prop is to be made.
 		return res;
 	}
 	inline void push(int sn, int s, int e) {
