@@ -18,11 +18,11 @@ struct SegTree {
 		return res;
 	}
 	inline void push(int sn, int s, int e) {
-//		if (tree[sn].prop) {
+//		if (tree[sn].prop) { // might need to change this
 //			int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
 //			tree[lsn].apply(s, m, tree[sn].prop);
 //			tree[rsn].apply(m + 1, e, tree[sn].prop);
-//			tree[sn].prop = 0;
+//			tree[sn].prop = 0; // might need to change this
 //		}
 	}
 	int start, end;
