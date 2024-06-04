@@ -15,6 +15,7 @@ struct SegTree {
 	inline Node combine(const Node& a, const Node& b) {
 		Node res;
 		res.x = a.x + b.x;
+		// if you add an attribute to 'node' (say cnt or prop), you might want to update res.cnt / res.prop as well!
 		return res;
 	}
 	inline void push(int sn, int s, int e) {
