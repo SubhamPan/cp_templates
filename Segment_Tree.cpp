@@ -5,7 +5,7 @@
 struct SegTree {
 	struct Node {
 		int x = 0; // Set default value here
-//		ll prop = 0;
+//		ll prop = 0; // should indicate no prop to be made (if prop involves sum, it may be zero; if prop involves updates - you can put it to inf/LLONG_MAX as a tag/indicator)
 		// Used for updates and propagation.
 		void apply(int s, int e, int v) {
 			x += v;
