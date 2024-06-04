@@ -1,5 +1,7 @@
 // wakaka's segtree template:
 // https://codeforces.com/contest/1354/submission/80476244
+
+// wakaka orz.
 struct SegTree {
 	struct Node {
 		int x = 0; // Set default value here
