@@ -1,3 +1,158 @@
+// wakaka's segtree template:
+// https://codeforces.com/contest/1354/submission/80476244
+struct SegTree {
+	struct Node {
+		int x = 0; // Set default value here
+//		ll prop = 0;
+		// Used for updates and propagation.
+		void apply(int s, int e, int v) {
+			x += v;
+//			prop += v;
+		}
+	};
+	inline Node combine(const Node& a, const Node& b) {
+		Node res;
+		res.x = a.x + b.x;
+		return res;
+	}
+	inline void push(int sn, int s, int e) {
+//		if (tree[sn].prop) {
+//			int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+//			tree[lsn].apply(s, m, tree[sn].prop);
+//			tree[rsn].apply(m + 1, e, tree[sn].prop);
+//			tree[sn].prop = 0;
+//		}
+	}
+	int start, end;
+	vector<Node> tree;
+	void build(int sn, int s, int e) {
+		if (s == e) {
+			// initialize here, possibly.
+			return;
+		}
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+		build(lsn, s, m);
+		build(rsn, m + 1, e);
+		tree[sn] = combine(tree[lsn], tree[rsn]);
+	}
+	template <typename T>
+	void build(int sn, int s, int e, vector<T>& v) {
+		if (s == e) {
+			tree[sn].x = v[s];
+			return;
+		}
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+		build(lsn, s, m, v);
+		build(rsn, m + 1, e, v);
+		tree[sn] = combine(tree[lsn], tree[rsn]);
+	}
+	template <typename... T>
+	void update(int sn, int s, int e, int qs, int qe, const T&... v) {
+		if (qs <= s && e <= qe) {
+			tree[sn].apply(s, e, v...);
+			return;
+		}
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+		push(sn, s, e);
+		if (qs <= m) update(lsn, s, m, qs, qe, v...);
+		if (qe > m) update(rsn, m + 1, e, qs, qe, v...);
+		tree[sn] = combine(tree[lsn], tree[rsn]);
+	}
+	Node query(int sn, int s, int e, int qs, int qe) {
+		if (qs <= s && e <= qe) return tree[sn];
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+		push(sn, s, e);
+		if (qe <= m) return query(lsn, s, m, qs, qe);
+		if (qs > m) return query(rsn, m + 1, e, qs, qe);
+		return combine(query(lsn, s, m, qs, qe), query(rsn, m + 1, e, qs, qe));
+	}
+	void query(int sn, int s, int e, int qs, int qe, const function<void(Node&, int, int)>& f) {
+		if (qs <= s && e <= qe) return f(tree[sn], s, e);
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
+		push(sn, s, e);
+		if (qs <= m) query(lsn, s, m, qs, qe, f);
+		if (qe > m) query(rsn, m + 1, e, qs, qe, f);
+	}
+	SegTree(int n) : SegTree(0, n - 1) {}
+	SegTree(int _start, int _end) : start(_start), end(_end) {
+		int n = end - start + 1;
+		int maxs = n == 1 ? 2 : 1 << (33 - __builtin_clz(n - 1));
+		tree.resize(maxs);
+		build(1, start, end);
+	}
+	template <typename T>
+	SegTree(vector<T>& v) {
+		int n = v.size();
+		int maxs = n == 1 ? 2 : 1 << (33 - __builtin_clz(n - 1));
+		tree.resize(maxs);
+		start = 0;
+		end = n - 1;
+		build(1, start, end, v);
+	}
+	Node query(int qs, int qe) {
+		return query(1, start, end, qs, qe);
+	}
+	Node query(int p) {
+		return query(1, start, end, p, p);
+	}
+	void query(int qs, int qe, const function<void(Node&, int, int)>& f) {
+		if (qs > qe) return;
+		query(1, start, end, qs, qe, f);
+	}
+	template <typename... T>
+	void update(int qs, int qe, const T&... v) {
+		update(1, start, end, qs, qe, v...);
+	}
+	// f goes from false to true
+	// Finds first v in [qs, qe] such that f(qs..v) = true, else -1
+	// Visits the segments from left to right, and update params when we ignore segs
+	int findFirst(int sn, int s, int e, int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		if (qs <= s && e <= qe) {
+			// visit
+			if (!f(tree[sn], s, e)) return -1;
+			// There exists v in [s, e] such that f(qs..v) = true, so recurse downwards
+		}
+		if (s == e) {
+			f(tree[sn], s, e); // We might want to update the last node
+			return s;
+		}
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1, ret = -1;
+		if (qs <= m) ret = findFirst(lsn, s, m, qs, qe, f);
+		if (qe > m && ret == -1) ret = findFirst(rsn, m + 1, e, qs, qe, f);
+		return ret;
+	}
+	// f goes from true to false
+	// Finds last v in [qs, qe] such that f(v..qe) = true, else -1
+	// Visits the segments from right to left, and update params when we ignore segs
+	int findLast(int sn, int s, int e, int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		if (qs <= s && e <= qe) {
+			// visit
+			if (!f(tree[sn], s, e)) return -1;
+			// There exists v in [s, e] such that f(v..qe) = true, so recurse downwards
+		}
+		if (s == e) {
+			f(tree[sn], s, e); // We might want to update the last node
+			return s;
+		}
+		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1, ret = -1;
+		if (qe > m) ret = findLast(rsn, m + 1, e, qs, qe, f);
+		if (qs <= m && ret == -1) ret = findLast(lsn, s, m, qs, qe, f);
+		return ret;
+	}
+	int findFirst(int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		return findFirst(1, start, end, qs, qe, f);
+	}
+	int findLast(int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		return findLast(1, start, end, qs, qe, f);
+	}
+};
+using Node = SegTree::Node;
+
+// ==================================================================================================================================
+
+
+
+
 //Shadow's(IITB) template
 class segtree {
  public:
