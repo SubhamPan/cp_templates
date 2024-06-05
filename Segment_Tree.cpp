@@ -158,13 +158,13 @@ struct SegTree {
 		return findLast(1, start, end, qs, qe, f);
 	}
 
-	void print() {
-		cout << "---" << endl;
-		for(ll i = 0; i < tree.size(); i++) {
-		  cout << i << ": " << tree[i].x << ", " << tree[i].prop << endl;
-		}
-		cout << "---" << endl;
-	}
+	// void print() {
+	// 	cout << "---" << endl;
+	// 	for(ll i = 0; i < tree.size(); i++) {
+	// 	  cout << i << ": " << tree[i].x << ", " << tree[i].prop << endl;
+	// 	}
+	// 	cout << "---" << endl;
+	// }
 };
 using Node = SegTree::Node;
 // // vector<ll> a(n); vin(a); // a is the array u want to set up and start ur segtree with.
