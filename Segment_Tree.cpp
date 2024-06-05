@@ -4,8 +4,9 @@
 // wakaka orz.
 struct SegTree {
 	struct Node {
-		int x = 0; // Set default value here
+		int x = 0; // Set default value here; should be neutral to the type of query being performed.
 //		ll prop = 0; // should indicate no prop to be made (if prop involves sum, it may be zero; if prop involves updates - you can put it to inf/LLONG_MAX as a tag/indicator)
+		// prop should be neutral to the type of updates being performed.
 		// Used for updates and propagation.
 		void apply(int s, int e, int v) {
 			x += v;
