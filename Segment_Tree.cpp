@@ -171,7 +171,7 @@ using Node = SegTree::Node;
 // // findFirst has been described below.
 // // 	------------------------
 // // 	how to use this:
-// // 	find index where pref sum >= p. [in an array of size n: [0,n-1]]. SegTree sgt(a).
+// // 	find first index where pref sum >= p. [in an array of size n: [0,n-1]]. SegTree sgt(a).
 // // 	ll p; cin >> p;
 // // 	ll pos = sgt.findFirst(0, n-1, [&](Node& x, ll s, ll e) {
 // // 		if(p > x.x) {
