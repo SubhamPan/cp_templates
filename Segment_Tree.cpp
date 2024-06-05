@@ -99,6 +99,7 @@ struct SegTree {
 		build(1, start, end, v);
 	}
 	Node query(int qs, int qe) {
+		assert(start <= qs && qe <= end);
 		return query(1, start, end, qs, qe);
 	}
 	Node query(int p) {
@@ -110,6 +111,7 @@ struct SegTree {
 	}
 	template <typename... T>
 	void update(int qs, int qe, const T&... v) {
+		assert(start <= qs && qe <= end);
 		update(1, start, end, qs, qe, v...);
 	}
 	// f goes from false to true
@@ -152,15 +154,17 @@ struct SegTree {
 		return ret;
 	}
 	int findFirst(int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		assert(start <= qs && qe <= end);
 		return findFirst(1, start, end, qs, qe, f);
 	}
 	int findLast(int qs, int qe, const function<bool(Node&, int, int)>& f) {
+		assert(start <= qs && qe <= end);
 		return findLast(1, start, end, qs, qe, f);
 	}
 
 	// void print() {
 	// 	cout << "---" << endl;
-	// 	for(ll i = 0; i < tree.size(); i++) {
+	// 	for(ll i = 0; i < (ll)tree.size(); i++) {
 	// 	  cout << i << ": " << tree[i].x << ", " << tree[i].prop << endl;
 	// 	}
 	// 	cout << "---" << endl;
