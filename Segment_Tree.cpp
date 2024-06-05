@@ -1,4 +1,5 @@
 // wakaka's segtree template:
+// https://codeforces.com/contest/1354/submission/264150983 -> my submission
 // https://codeforces.com/contest/1354/submission/80476244
 
 // wakaka orz.
