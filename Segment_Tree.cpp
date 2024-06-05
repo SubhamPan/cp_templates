@@ -3,6 +3,7 @@
 // https://codeforces.com/contest/1354/submission/80476244
 
 // wakaka orz.
+// remember we only need lazy/push when we need range updates.
 struct SegTree {
 	struct Node {
 		int x = 0; // Set default value here; should be neutral to the type of query being performed.
