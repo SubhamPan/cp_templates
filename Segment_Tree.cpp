@@ -155,6 +155,14 @@ struct SegTree {
 	int findLast(int qs, int qe, const function<bool(Node&, int, int)>& f) {
 		return findLast(1, start, end, qs, qe, f);
 	}
+
+	void print() {
+		cout << "---" << endl;
+		for(ll i = 0; i < tree.size(); i++) {
+		  cout << i << ": " << tree[i].x << ", " << tree[i].prop << endl;
+		}
+		cout << "---" << endl;
+	}
 };
 using Node = SegTree::Node;
 
