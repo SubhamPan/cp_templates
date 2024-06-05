@@ -130,6 +130,7 @@ struct SegTree {
 		if (qe > m && ret == -1) ret = findFirst(rsn, m + 1, e, qs, qe, f);
 		return ret;
 	}
+
 	// f goes from true to false
 	// Finds last v in [qs, qe] such that f(v..qe) = true, else -1
 	// Visits the segments from right to left, and update params when we ignore segs
@@ -165,6 +166,22 @@ struct SegTree {
 	}
 };
 using Node = SegTree::Node;
+// // vector<ll> a(n); vin(a); // a is the array u want to set up and start ur segtree with.
+// // SegTree sgt(a); || sgt.update(l,r, val); || cout << (sgt.query(l,r)).x << endl;
+// // findFirst has been described below.
+// // 	------------------------
+// // 	how to use this:
+// // 	find index where pref sum >= p. [in an array of size n: [0,n-1]]. SegTree sgt(a).
+// // 	ll p; cin >> p;
+// // 	ll pos = sgt.findFirst(0, n-1, [&](Node& x, ll s, ll e) {
+// // 		if(p > x.x) {
+// // 		      p -= x.x;
+// // 		      return false; // dont go deeper into node x
+// // 		}
+		
+// // 		return true;
+// // 	});
+// // 	------------------------
 
 // ==================================================================================================================================
 
