@@ -125,6 +125,7 @@ struct SegTree {
 			return s;
 		}
 		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1, ret = -1;
+		push(sn, s, e);
 		if (qs <= m) ret = findFirst(lsn, s, m, qs, qe, f);
 		if (qe > m && ret == -1) ret = findFirst(rsn, m + 1, e, qs, qe, f);
 		return ret;
@@ -143,6 +144,7 @@ struct SegTree {
 			return s;
 		}
 		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1, ret = -1;
+		push(sn, s, e);
 		if (qe > m) ret = findLast(rsn, m + 1, e, qs, qe, f);
 		if (qs <= m && ret == -1) ret = findLast(lsn, s, m, qs, qe, f);
 		return ret;
