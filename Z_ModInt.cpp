@@ -128,7 +128,7 @@ struct Z {
 //if u do Z%2, be sure to change P to 1000000000.
 // CHANGE P and NN whenever required!!!!
 //===========================================================
-const int NN = 200005; //2e5
+const int NN = 300005; //2e5
 Z fac[NN];
 
 Z NcR(int n, int r) {
