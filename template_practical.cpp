@@ -1,4 +1,3 @@
-////------------> FLS.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -6,15 +5,11 @@ using ll = long long; using ld = long double;
 #define int long long
 #define double long double
 #define endl '\n'
-#define FLS ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
+#define Hi_I_am_Subham_Pan ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
 #define vin(a) for(auto&XX:a)cin>>XX;//idk y but it restricts my thought process at times
 #define vout(v) for (auto XX: v)cout<<XX<<' ';cout<<endl;
-#define vvin(a) for(auto& b : a) {for(auto& x : b) cin>>x;}
-#define vvout(a) for(auto& b: a) {for(auto& x : b) {cout<<x<<" ";}cout<<endl;}
 #define meh {cout<<"NO"<<endl;return;}
 #define yay {cout<<"YES"<<endl;return;}
-#define IMmeh {cout<<"NO"<<endl;continue;}
-#define IMyay {cout<<"YES"<<endl;continue;}
 //=======================================================------------------------------------------------------
 void print(int t) {cout << t;} 
 void print(string t) {cout << t;}
@@ -52,44 +47,27 @@ const int mod = 1000000007; //1e9+7, comment it out if u want to use the other M
 
 
 void solve() {
+      
 
-    
-    
+      
 
-    // cout<<"===="<<endl;
-
+      // cout << "===========" << endl;    
 }
 
 /*ngu, lesgo*/
 int32_t main() {
-    FLS
-    //cout<<fixed<<setprecision(20)<<x; //-> for printing a double 'x'.
+      Hi_I_am_Subham_Pan
+      //cout<<fixed<<setprecision(20)<<x; //-> for printing a double 'x'.
 
-    // freopen("", "r", stdin);
-    // freopen("", "w", stdout);
-    
-    int TT=1;
-    cin>>TT; //comment out this line if only 1 test case is needed
-    while(TT--) {
-        solve();
-    }
- 
-    return 0;
+      // freopen("", "r", stdin);
+      // freopen("", "w", stdout);
+
+      int TT=1;
+      cin>>TT; //comment out this line if only 1 test case is needed
+      while(TT--) {
+            solve();
+      }
+
+      return 0;
 }
 
-
-
-
-/*
-
-
-Chhoo lo jo mujhe tum kabhi
-Kho na jaun main raat-din
-Nazaron mein tum ho base
-
-Kehdo jo tum ek baar
-Mere ho bas tum mere
-Nazaron mein tum ho base
-
-
-*/
