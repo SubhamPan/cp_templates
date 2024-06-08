@@ -1,4 +1,9 @@
 // FXNS
+
+// this file is a warehouse of functions commonly used in contests.
+// i mainly use the Z (mint) template and the factorization functions from here. Most of the functions apart from them might be outdated.
+
+
 //=========================================================
 //Interactive questions
 int ask(int r,int c) {
@@ -88,10 +93,172 @@ ll NcR(int n, int r)
 
 
 
-//=================================================================
-//===========================================================
+//==================================================================
+//==================================================================
 
-//Array of prime numbers (denoted by 1) till const int MAX.
+//modular arithmetic for MOD type questions code below:
+
+
+
+constexpr int P = 1000000007;
+// assume -P <= x < 2P
+int norm(int x) {
+    if (x < 0) {
+        x += P;
+    }
+    if (x >= P) {
+        x -= P;
+    }
+    return x;
+}
+template<class T>
+T power(T a, ll b) {
+    T res = 1;
+    for (; b; b /= 2, a *= a) {
+        if (b % 2) {
+            res *= a;
+        }
+    }
+    return res;
+}
+struct Z {
+    int x;
+    Z(int x = 0) : x(norm(x)) {}
+    // Z(ll x) : x(norm((int)(x % P))) {} //uncomment this line if there is no #define int long long
+    int val() const {
+        return x;
+    }
+    Z operator-() const {
+        return Z(norm(P - x));
+    }
+    Z inv() const {
+        assert(x != 0);
+        return power(*this, P - 2);
+    }
+    Z &operator*=(const Z &rhs) {
+        x = ll(x) * rhs.x % P;
+        return *this;
+    }
+    Z &operator+=(const Z &rhs) {
+        x = norm(x + rhs.x);
+        return *this;
+    }
+    Z &operator-=(const Z &rhs) {
+        x = norm(x - rhs.x);
+        return *this;
+    }
+    Z &operator/=(const Z &rhs) {
+        return *this *= rhs.inv();
+    }
+    Z &operator%=(const Z &rhs) {
+        x = x % rhs.x;
+        return *this;
+    }
+    friend Z operator*(const Z &lhs, const Z &rhs) {
+        Z res = lhs;
+        res *= rhs;
+        return res;
+    }
+    friend Z operator+(const Z &lhs, const Z &rhs) {
+        Z res = lhs;
+        res += rhs;
+        return res;
+    }
+    friend Z operator-(const Z &lhs, const Z &rhs) {
+        Z res = lhs;
+        res -= rhs;
+        return res;
+    }
+    friend Z operator/(const Z &lhs, const Z &rhs) {
+        Z res = lhs;
+        res /= rhs;
+        return res;
+    }
+    friend Z operator%(const Z &lhs, const Z &rhs) {
+        Z res = lhs;
+        res %= rhs;
+        return res;
+    }
+    friend bool operator==(const Z &lhs, const Z &rhs) {
+        if(lhs.x == rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    friend bool operator!=(const Z &lhs, const Z &rhs) {
+        if(lhs.x != rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    friend bool operator<(const Z &lhs, const Z &rhs) {
+        if(lhs.x < rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    friend bool operator>(const Z &lhs, const Z &rhs) {
+        if(lhs.x > rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    friend istream &operator>>(istream &is, Z &a) {
+        ll v;
+        is >> v;
+        a = Z(v);
+        return is;
+    }
+    friend ostream &operator<<(ostream &os, const Z &a) {
+        return os << a.val();
+    }
+
+};
+
+//Z ans;
+// or
+//Z fact[100005];
+//u get the point ig, Z is a new datatype like int.
+//if u do Z%2, be sure to change P to 1000000000.
+// CHANGE P and NN whenever required!!!!
+//===========================================================
+const int NN = 300005; //3e5
+Z fac[NN];
+
+Z NcR(int n, int r) {
+    if(n<r) {return 0;}
+    if(r==0) {return 1;}
+
+    //fill factorial array
+
+    return fac[n]/(fac[r]*fac[n-r]);
+}
+
+// dont go for the factorial array method in this question,
+// since we may require a factorial of a very big number. Do this instead:
+Z NcR_slow(int n, int r) {
+    if(n < r) {return 0;}
+    Z prod = 1;
+    for(int i = 0; i < r; i++) {
+        prod *= (n-i);
+        prod /= (i+1);
+    }
+    return prod;
+}
+
+    //put this in int main
+    fac[0] = 1; fac[1] = 1; fac[2] = 2;
+    for(int i = 3; i < NN; i++) {
+        fac[i] = fac[i-1]*i;
+    }
+//===========================================================
+//===============================================================================
+
+//Array of prime numbers (denoted by 1) till const int MAX. -> to be put globally.
 int prime[MAX];
 
     //the following part is to be put into int main
@@ -120,6 +287,7 @@ if(x>1) {
 }
 
 //============================================================
+
 
 bool isprime(int n) {
     if (n <= 1) {
@@ -158,4 +326,40 @@ vector<int> allfactorslist(int x) {
 
 
 //============================================================
+//============================================================
 
+
+bool vis[100001] = {false};
+ 
+void dfs (vector <int> g[], int at){
+    if (vis[at]) return;
+    vis[at] = true;
+    for (auto x: g[at]){
+        dfs (g, x);
+    }
+}
+ 
+
+list <int> q;
+bool vis2[100001] = {false};
+ 
+void bfs (vector <int> g[], int at){
+    vis2[at] = true;
+    q.push_back(at);
+    while (!q.empty()){
+        int s = q.front();
+        q.pop_front();
+        cout << s << " ";
+        for (auto x: g[s]){
+            if (!vis2[x]){
+                vis2[x] = true;
+                q.push_back(x);
+            }
+        }
+    }
+}
+
+
+//===============================================================================================
+//===============================================================================================
+// template
