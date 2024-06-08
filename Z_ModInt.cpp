@@ -1,3 +1,5 @@
+//==================================================================
+
 //modular arithmetic for MOD type questions code below:
 
 
@@ -128,7 +130,7 @@ struct Z {
 //if u do Z%2, be sure to change P to 1000000000.
 // CHANGE P and NN whenever required!!!!
 //===========================================================
-const int NN = 200005; //2e5
+const int NN = 300005; //3e5
 Z fac[NN];
 
 Z NcR(int n, int r) {
@@ -158,7 +160,3 @@ Z NcR_slow(int n, int r) {
         fac[i] = fac[i-1]*i;
     }
 //===========================================================
-//===============================================================================
-
-
-https://codeforces.com/contest/1629/submission/239823737
