@@ -28,4 +28,5 @@ vector<int> toposort(vector<vector<int>> &adj) {
 
     return ans;
 }
+// check out cyclicCheck.cpp from the repo as well, might want to use it before using toposort.
 //=====================================================================================
