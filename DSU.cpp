@@ -26,6 +26,7 @@ public:
  
             p[d] = c;
             sz[c] += sz[d];
+            // sz[d] = 0;
             return true;
         } else{
             //you made a cycle by including this edge a-b.
