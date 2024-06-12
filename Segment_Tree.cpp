@@ -101,7 +101,7 @@ struct SegTree {
 		build(1, start, end, v);
 	}
 	Node query(int qs, int qe) {
-		assert(start <= qs && qe <= end);
+		assert(start <= qs && qs <= qe && qe <= end);
 		return query(1, start, end, qs, qe);
 	}
 	Node query(int p) {
@@ -113,7 +113,7 @@ struct SegTree {
 	}
 	template <typename... T>
 	void update(int qs, int qe, const T&... v) {
-		assert(start <= qs && qe <= end);
+		assert(start <= qs && qs <= qe && qe <= end);
 		update(1, start, end, qs, qe, v...);
 	}
 	// f goes from false to true
