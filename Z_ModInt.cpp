@@ -7,6 +7,15 @@
 
 int P = 1000000007;
 // assume -P <= x < 2P
+int norm(int x) {
+    if (x < 0) {
+        x += P;
+    }
+    if (x >= P) {
+        x -= P;
+    }
+    return x;
+}
 template<class T>
 T power(T a, ll b) {
     T res = 1;
@@ -20,113 +29,100 @@ T power(T a, ll b) {
 struct Z {
     int x;
     Z(int x = 0) : x(norm(x)) {}
-
-    // Ensure x is always within the range [0, P-1]
-    static int norm(int x) {
-        if (x < 0) {
-            x %= P;
-            x += P;
-            x %= P;
-        }
-        if (x >= P) x %= P;
+    // Z(ll x) : x(norm((int)(x % P))) {} //uncomment this line if there is no #define int long long
+    int val() const {
         return x;
     }
-
-    int val() const {
-        return norm(x);
-    }
-
     Z operator-() const {
         return Z(norm(P - x));
     }
-
     Z inv() const {
         assert(x != 0);
         return power(*this, P - 2);
     }
-
     Z &operator*=(const Z &rhs) {
-        x = norm(ll(x) * rhs.x % P);
+        x = ll(x) * rhs.x % P;
         return *this;
     }
-
     Z &operator+=(const Z &rhs) {
         x = norm(x + rhs.x);
         return *this;
     }
-
     Z &operator-=(const Z &rhs) {
         x = norm(x - rhs.x);
         return *this;
     }
-
     Z &operator/=(const Z &rhs) {
         return *this *= rhs.inv();
     }
-
     Z &operator%=(const Z &rhs) {
-        x = norm(x % rhs.x);
+        x = x % rhs.x;
         return *this;
     }
-
     friend Z operator*(const Z &lhs, const Z &rhs) {
         Z res = lhs;
         res *= rhs;
         return res;
     }
-
     friend Z operator+(const Z &lhs, const Z &rhs) {
         Z res = lhs;
         res += rhs;
         return res;
     }
-
     friend Z operator-(const Z &lhs, const Z &rhs) {
         Z res = lhs;
         res -= rhs;
         return res;
     }
-
     friend Z operator/(const Z &lhs, const Z &rhs) {
         Z res = lhs;
         res /= rhs;
         return res;
     }
-
     friend Z operator%(const Z &lhs, const Z &rhs) {
         Z res = lhs;
         res %= rhs;
         return res;
     }
-
     friend bool operator==(const Z &lhs, const Z &rhs) {
-        return lhs.val() == rhs.val();
+        if(lhs.x == rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
     friend bool operator!=(const Z &lhs, const Z &rhs) {
-        return lhs.val() != rhs.val();
+        if(lhs.x != rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
     friend bool operator<(const Z &lhs, const Z &rhs) {
-        return lhs.val() < rhs.val();
+        if(lhs.x < rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
     friend bool operator>(const Z &lhs, const Z &rhs) {
-        return lhs.val() > rhs.val();
+        if(lhs.x > rhs.x) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
     friend istream &operator>>(istream &is, Z &a) {
         ll v;
         is >> v;
         a = Z(v);
         return is;
     }
-
     friend ostream &operator<<(ostream &os, const Z &a) {
         return os << a.val();
     }
-};
 
+};
 
 //Z ans;
 // or
