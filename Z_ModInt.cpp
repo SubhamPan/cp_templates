@@ -23,7 +23,11 @@ struct Z {
 
     // Ensure x is always within the range [0, P-1]
     static int norm(int x) {
-        if (x < 0) x += P;
+        if (x < 0) {
+            x %= P;
+            x += P;
+            x %= P;
+        }
         if (x >= P) x %= P;
         return x;
     }
