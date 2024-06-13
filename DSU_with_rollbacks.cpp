@@ -33,6 +33,10 @@ class DSUwithRollback {
                   history.pop_back();
             }
       }
+
+      bool isSame(int x, int y) {
+            return find(x)==find(y);
+      }  
  
       int getSize(int x) {
             return sz[find(x)];
