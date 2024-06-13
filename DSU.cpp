@@ -34,7 +34,7 @@ public:
         }
     }
  
-    bool same(int x, int y) {
+    bool isSame(int x, int y) {
         return find(x)==find(y);
     }
  
