@@ -38,7 +38,7 @@ public:
         return find(x)==find(y);
     }
  
-    int size(int x) {
+    int getSize(int x) {
         return sz[find(x)];
     }
  
