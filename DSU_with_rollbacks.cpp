@@ -1,32 +1,43 @@
-struct DisjointSetWithRollback {
-	vector<int> par;
-	vector<pair<int, int>> mods;
-	DisjointSetWithRollback(int n) : par(n, -1) {}
-	int get(int a) {
-		while (par[a] >= 0) a = par[a];
-		return a;
-	}
-	int getSize(int a) { return -par[get(a)]; } // O(log n)!
-	bool join(int a, int b) {
-		int pa = get(a), pb = get(b);
-		if (pa == pb) return false;
-		if (par[pa] > par[pb]) swap(pa, pb);
-		mods.emplace_back(pa, par[pa]);
-		mods.emplace_back(pb, par[pb]);
-		// Make smaller pb a child of larger pa.
-		par[pa] += par[pb];
-		par[pb] = pa;
-		return true;
-	}
-	int save() { return mods.size(); }
-	void rollback(int savePoint) {
-		while (mods.size() > savePoint) {
-			auto& v = mods.back();
-			par[v.first] = v.second;
-			mods.pop_back();
-		}
-	}
+class DSUwithRollback {
+  private:
+      vector<int> p, sz;
+      // stores previous unites
+      vector<pair<int &, int>> history;
+ 
+  public:
+      DSUwithRollback(int n) : p(n), sz(n, 1) { iota(p.begin(), p.end(), 0); }
+ 
+      int find(int x) { return x == p[x] ? x : find(p[x]); }
+ 
+      bool merge(int a, int b) {
+            a = find(a);
+            b = find(b);
+            if (a == b) { return false; }
+            if (sz[a] < sz[b]) { swap(a, b); }
+ 
+            // save this merge operation
+            history.push_back({sz[a], sz[a]});
+            history.push_back({p[b], p[b]});
+ 
+            p[b] = a;
+            sz[a] += sz[b];
+ 
+            return true;
+      }
+ 
+      int snapshot() { return history.size(); }
+ 
+      void rollback(int until) {
+            while (snapshot() > until) {
+                  history.back().first = history.back().second;
+                  history.pop_back();
+            }
+      }
+ 
+      int getSize(int x) {
+            return sz[find(x)];
+      }
 };
 
 // https://codeforces.com/contest/1681/submission/159596854
-// https://codeforces.com/contest/1681/submission/252078939 -> [my submission for the saame question]
+// https://codeforces.com/contest/1681/submission/265639005 -> [my submission for the saame question]
