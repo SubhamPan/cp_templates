@@ -6,7 +6,7 @@
 
 
 int P = 1000000007;
-// assume -P <= x < 2P
+
 int norm(int x) {
     if(-P <= x && x < P) {
         
@@ -18,13 +18,6 @@ int norm(int x) {
         x += P;
     }
 
-    
-    // if (x < 0) {
-    //     x += P;
-    // }
-    // if (x >= P) {
-    //     x -= P;
-    // }
     return x;
 }
 template<class T>
