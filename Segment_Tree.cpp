@@ -195,6 +195,123 @@ using Node = SegTree::Node;
 
 
 
+
+// Minimal version of the above segtree template:
+struct SegTree {
+      struct Node {
+            ll x = 0;
+            void apply(ll s, ll e, ll v) {
+                  x = v;
+            }
+      };
+
+      inline Node combine(const Node& a, const Node& b) {
+            Node res;
+            res.x = a.x + b.x;
+            return res;
+      }
+
+      inline void push(ll sn, ll s, ll e) {
+
+      }
+
+
+      ll start, end;
+      vector<Node> tree;
+
+      template <typename T>
+      void build(ll sn, ll s, ll e, vector<T>& v) {
+            if(s == e) {
+                  tree[sn].x = v[s];
+                  return;
+            }
+            ll m = (s+e) >> 1, lsn = sn*2, rsn = sn*2 + 1;
+            build(lsn, s, m, v);
+            build(rsn, m+1, e, v);
+            tree[sn] = combine(tree[lsn], tree[rsn]);
+      }
+
+      template <typename... T>
+      void update(ll sn, ll s, ll e, ll qs, ll qe, const T&... v) {
+            if(qs <= s && e <= qe) {
+                  tree[sn].apply(s,e,v...);
+                  return;
+            }
+            ll m = (s+e) >> 1, lsn = sn*2, rsn = 2*sn + 1;
+            push(sn, s, e);
+            if(qs <= m) {update(lsn,s,m,qs,qe,v...);}
+            if(qe > m) {update(rsn,m+1, e, qs, qe, v...);}
+            tree[sn] = combine(tree[lsn], tree[rsn]);
+      }
+
+      Node query(ll sn, ll s, ll e, ll qs, ll qe) {
+            if(qs <= s && e <= qe) {return tree[sn];}
+            ll m = (s+e) >> 1, lsn = sn*2, rsn = 2*sn + 1;
+            push(sn, s, e);
+            if(qe <= m) {return query(lsn, s, m, qs, qe);}
+            if(qs > m) {return query(rsn, m+1, e, qs, qe);}
+            return combine(query(lsn, s, m, qs, qe), query(rsn, m+1, e, qs, qe));
+      }
+
+      template <typename T>
+      SegTree(vector<T>& v) {
+            ll n = v.size();
+            ll maxs = (n == 1 ? 2 : 1LL << (33 - __builtin_clz(n-1)));
+            tree.resize(maxs);
+            start = 0;
+            end = n-1;
+            build(1, start, end, v);
+      }
+
+
+      // wrapper fxns
+      Node query(ll qs, ll qe) {
+            assert(start <= qs && qs <= qe && qe <= end);
+            return query(1, start, end, qs, qe);
+      }
+
+      template <typename... T>
+      void update(ll qs, ll qe, const T&... v) {
+            assert(start <= qs && qs <= qe && qe <= end);
+            update(1, start, end, qs, qe, v...);
+      }
+
+};
+using Node = SegTree::Node;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==================================================================================================================================
+// 	==================================================================================================================================
+// 	==================================================================================================================================
+// 	==================================================================================================================================
+
+
 //Shadow's(IITB) template
 class segtree {
  public:
