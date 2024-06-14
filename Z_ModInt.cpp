@@ -8,12 +8,23 @@
 int P = 1000000007;
 // assume -P <= x < 2P
 int norm(int x) {
-    if (x < 0) {
+    if(-P <= x && x < P) {
+        
+    } else {
+        x %= P;
+    }
+    
+    if(x < 0) {
         x += P;
     }
-    if (x >= P) {
-        x -= P;
-    }
+
+    
+    // if (x < 0) {
+    //     x += P;
+    // }
+    // if (x >= P) {
+    //     x -= P;
+    // }
     return x;
 }
 template<class T>
