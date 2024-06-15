@@ -4,8 +4,7 @@
 
 
 
-
-int P = 1000000007;
+int P = 998244353;
 
 int norm(int x) {
     if(-P <= x && x < P) {
@@ -137,14 +136,15 @@ struct Z {
 //===========================================================
 const int NN = 300005; //3e5
 Z fac[NN];
+Z inv_fac[NN];
 
 Z NcR(int n, int r) {
-    if(n<r) {return 0;}
+      if(n<r) {return 0;}
     if(r==0) {return 1;}
 
     //fill factorial array
 
-    return fac[n]/(fac[r]*fac[n-r]);
+    return fac[n] * inv_fac[r] * inv_fac[n-r];
 }
 
 // dont go for the factorial array method in this question,
@@ -163,5 +163,9 @@ Z NcR_slow(int n, int r) {
     fac[0] = 1; fac[1] = 1; fac[2] = 2;
     for(int i = 3; i < NN; i++) {
         fac[i] = fac[i-1]*i;
+    }
+    inv_fac[NN-1] = Z(1) / fac[NN-1];
+    for(ll i = NN-2; i >= 0; i--) {
+        inv_fac[i] = inv_fac[i+1] * (i+1);
     }
 //===========================================================
