@@ -4,7 +4,7 @@
 
 
 
-int P = 998244353;
+int P = 1000000007;
 
 int norm(int x) {
     if(-P <= x && x < P) {
