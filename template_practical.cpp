@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
+// #include <ext/pb_ds/assoc_container.hpp> 
+// #include <ext/pb_ds/tree_policy.hpp>
+
 using namespace std;
+// using namespace __gnu_pbds; 
 
 using ll = long long; using ld = long double;
 #define int long long
@@ -10,6 +14,9 @@ using ll = long long; using ld = long double;
 #define vout(v) for (auto XX: v)cout<<XX<<' ';cout<<endl;
 #define meh {cout<<"NO"<<endl;return;}
 #define yay {cout<<"YES"<<endl;return;}
+
+// template<class T> 
+// using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistics_node_update> ;
 //=======================================================------------------------------------------------------
 void print(int t) {cout << t;} 
 void print(string t) {cout << t;}
@@ -36,6 +43,7 @@ constexpr ll inf = 1E18;
 //(raise(a,b) = a^b) [a,b > 0].
 long long raise(long long a, long long b) {long long res = 1;for(int i = 0; i<b; i++) {if(inf/res < a) return 0;res *= a;}return res;}
 bool isSquare(int n) {int r = sqrtl(1.0L * n);return r*r == n;}
+// ll sq(ll x) {return x*x;}
 //=======================================================----------------------------------
 const int MAX = 200007; //2*10^5 + 7
 const int mod = 1000000007; //1e9+7, comment it out if u want to use the other MOD
@@ -49,7 +57,6 @@ const int mod = 1000000007; //1e9+7, comment it out if u want to use the other M
 void solve() {
       
 
-      
 
       // cout << "===========" << endl;    
 }
