@@ -1,4 +1,122 @@
 // shawdow orz
+
+const ll ALPHABET = 26;
+struct trie {
+
+      // ll ans = 0;
+
+      struct node {
+            bool ends;
+            ll st_cnt; // subtree size / count
+            array<node*, ALPHABET> next;
+            
+            node() {
+                  ends = false;
+                  for(ll i = 0; i < 26; i++) {
+                        next[i] = NULL;
+                  }
+                  st_cnt = 0;
+            }
+      };
+
+      inline int where(char c) {
+            return c - 'a';
+      }
+
+      node *head = NULL;
+      trie() {
+            head = new node();
+      }
+
+      void insert(const string &s) {
+            node *curr = head;
+
+            for(ll i = 0; i < (ll)s.size(); i++) {
+                  curr->st_cnt++;
+                  
+                  ll x = where(s[i]);
+
+                  if(curr->next[x] == NULL) {
+                        curr->next[x] = new node();
+                  }
+
+                  curr = curr->next[x];
+                  // ans += curr->st_cnt;
+            }
+
+            curr->st_cnt++;
+            curr->ends = true;
+      }
+
+      bool find(const string& s) {
+            node *curr = head;
+
+            for(ll i = 0; i < (ll)s.size(); i++) {
+                  ll x = where(s[i]);
+                  if(curr->next[x] == NULL) {
+                        return false;
+                  }
+                  curr = curr->next[x];
+            }
+
+            return curr->ends;
+      }
+
+      void erase(const string& s) { // must be present
+            node *curr = head;
+
+            for(ll i = 0; i < (ll)s.size(); i++) {
+                  curr->st_cnt--;
+                  
+                  ll x = where(s[i]);
+
+                  if(curr->next[x] == NULL) {
+                        assert(false);
+                  }
+
+                  curr = curr->next[x];
+            }
+
+            curr->st_cnt--;
+            if(curr->st_cnt == 0) { // there might be duplicate elements. so erase only if it is the last element leftover.
+                  curr->ends = false;
+            }
+      }
+
+      ll prefix(const string& s) { // number of strings that have s as prefix
+            node *curr = head;
+            for(ll i = 0; i < (ll)s.size(); i++) {
+                  ll x = where(s[i]);
+                  if(curr->next[x] == NULL) {
+                        return 0;
+                  }
+                  curr = curr->next[x];
+            }
+            return curr->st_cnt;
+      }
+
+      void delt(node *curr) {
+            if(curr == NULL) {return;}
+            for(ll i = 0; i < 26; i++) {
+                  delt(curr->next[i]);
+            }
+            delete curr;
+      }
+
+      ~trie() {
+            delt(head);
+      }
+};
+// trie T;
+// T.insert(s);
+
+
+
+
+
+
+// ================================================================================================
+
 const int ALPHABET = 26;
 struct trie{
 	struct node{
