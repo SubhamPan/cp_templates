@@ -79,7 +79,7 @@ struct trie{
 		for(int i = 0; i < 26; i++){
 			delt(cur->next[i]);
 		}
-		delete 
+		delete cur;
 	}
 	
 	~trie(){
