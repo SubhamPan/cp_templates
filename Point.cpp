@@ -1,4 +1,6 @@
-// https://codeforces.com/contest/1860/submission/219298549
+// https://codeforces.com/contest/1860/submission/219298549 // jiangly using the template below to solve some 2900 question.
+
+// https://codeforces.com/contest/474/submission/267621336   // -> chatgpt helped me use the template below to solve this question. chat link: [https://chatgpt.com/share/c56b16f0-5206-4598-8eaa-645a7efc15bd] [pansubham3 google chrome account]
 
 // comment out #define double long double.
 // jiangly orz
