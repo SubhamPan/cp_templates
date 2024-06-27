@@ -1,7 +1,7 @@
 // https://codeforces.com/contest/1860/submission/219298549
 
 // comment out #define double long double.
-
+// jiangly orz
 using i64 = long long;
 template<class T>
 struct Point {
