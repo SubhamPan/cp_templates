@@ -110,7 +110,34 @@ struct trie {
 // trie T;
 // T.insert(s);
 
+// https://leetcode.com/problems/design-add-and-search-words-data-structure/description/
+// code snippet for the above question: [search for "[..abc..pq]" matches. (where '.' could be any letter.)]
 
+// dfs type recursive function for that:
+    // bool find(node* curr, const string& s, ll idx) {
+    //     ll n = (ll)s.size();
+    //     if(idx == n) {
+    //         return curr->ends;
+    //     }
+    //     bool ans = false;
+    //     if(s[idx] == '.') {
+    //         for(ll x = 0; x < 26; x++) {
+    //             if(curr->next[x] == NULL) {
+    //                 // take lite.
+    //             } else {
+    //                 ans |= find(curr->next[x], s, idx+1);
+    //             }
+    //         }
+    //     } else {
+    //         ll x = where(s[idx]);
+    //         if(curr->next[x] == NULL) {
+    //             ans = false;
+    //         } else {
+    //             ans = find(curr->next[x], s, idx+1);
+    //         }
+    //     }
+    //     return ans;
+    // }
 
 
 
