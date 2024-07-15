@@ -48,11 +48,11 @@ for (ll i = 0; i < n; i++) {
     }
 }
 
-auto comp = [&](const ll& u, const ll& v) -> bool {
+auto comp = [&](const auto& u, const auto& v) -> bool {
     if (leaves[u].size() == leaves[v].size()) return u < v;
     return leaves[u].size() > leaves[v].size();
 };
-
+// NOTE: do NOT put auto instead of ll in the following line:
 std::function<bool(const ll&, const ll&)> comp_func = comp;
 set<ll, decltype(comp_func)> st(comp_func);
 
