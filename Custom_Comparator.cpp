@@ -38,3 +38,24 @@ s.insert(5);s.insert(2);s.insert(9);s.insert(1);s.insert(6);
 for (int num : s) {std::cout << num << " ";}
 // 9 6 5 2 1
 
+
+// =====================================================
+//if you need a comparator function that has [&]; do this:
+vector<set<ll>> leaves(n);
+for (ll i = 0; i < n; i++) {
+    if (g[i].size() == 1) {
+        leaves[*g[i].begin()].insert(i);
+    }
+}
+
+auto comp = [&](const ll& u, const ll& v) -> bool {
+    if (leaves[u].size() == leaves[v].size()) return u < v;
+    return leaves[u].size() > leaves[v].size();
+};
+
+std::function<bool(const ll&, const ll&)> comp_func = comp;
+set<ll, decltype(comp_func)> st(comp_func);
+
+for (ll i = 0; i < n; i++) {st.insert(i);}
+// ===================
+
