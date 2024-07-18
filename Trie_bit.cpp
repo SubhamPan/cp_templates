@@ -132,10 +132,12 @@ struct trie {
             }
             delete curr;
       }
- 
-      ~trie() {
-            delt(head);
-      }
+
+      // keeping the destructor commented makes it work. when it was uncommented T.~trie() wasnt working
+      // use T.delt(T.head) instead.
+      // ~trie() {
+      //       delt(head);
+      // }
 };
 // trie T;
 // T.insert(x);
