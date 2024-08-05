@@ -16,10 +16,12 @@ template <typename T> struct ordered_multiset {
         ost.erase(make_pair(val, freq[val]--));
     }
 
+    // find number of elements strictly lesser than val.
     int order_of_key(T val) {
         return ost.order_of_key(make_pair(val, -1));
     }
 
+    // access element at index "val" of the ordered_multiset.
     T find_by_order(T val) {
         return ost.find_by_order(val)->first;
     }
