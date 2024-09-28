@@ -1,7 +1,9 @@
 // shawdow orz
 
 
-const ll ALPHABET = 10; // '0' to '9'
+const ll ALPHABET = 26; // 'a' to 'z'
+// can change it to 10 for '0' to '9' and also change where function to c - '0'.
+
 struct trie {
 
       // ll ans = 0;
