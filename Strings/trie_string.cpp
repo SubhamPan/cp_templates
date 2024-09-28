@@ -1,6 +1,7 @@
 // shawdow orz
 
-const ll ALPHABET = 26;
+
+const ll ALPHABET = 10; // '0' to '9'
 struct trie {
 
       // ll ans = 0;
@@ -12,7 +13,7 @@ struct trie {
             
             node() {
                   ends = false;
-                  for(ll i = 0; i < 26; i++) {
+                  for(ll i = 0; i < ALPHABET; i++) {
                         next[i] = NULL;
                   }
                   st_cnt = 0;
@@ -97,7 +98,7 @@ struct trie {
 
       void delt(node *curr) {
             if(curr == NULL) {return;}
-            for(ll i = 0; i < 26; i++) {
+            for(ll i = 0; i < ALPHABET; i++) {
                   delt(curr->next[i]);
             }
             delete curr;
