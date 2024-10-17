@@ -50,6 +50,8 @@ struct SegTree {
 	void build(int sn, int s, int e, vector<T>& v) {
 		if (s == e) {
 			tree[sn].x = v[s];
+			// maybe you want some other attribute to be initialized in build?
+                  	// tree[sn].apply(s, s, v[s]); // <- do this
 			return;
 		}
 		int m = (s + e) >> 1, lsn = sn * 2, rsn = sn * 2 + 1;
