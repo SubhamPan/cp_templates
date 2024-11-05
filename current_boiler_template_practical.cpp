@@ -9,11 +9,20 @@ using ll = long long; using ld = long double;
 #define int long long
 #define double long double
 #define endl '\n'
-#define Hi_I_am_Subham_Pan ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
 #define vin(a) for(auto&XX:a)cin>>XX;//idk y but it restricts my thought process at times
 #define vout(v) for (auto XX: v)cout<<XX<<' ';cout<<endl;
+
 #define meh {cout<<"NO"<<endl;return;}
 #define yay {cout<<"YES"<<endl;return;}
+
+
+#define all(v) (v).begin(), (v).end()
+#define pb push_back
+#define ff first
+#define ss second
+#define sz(x) (ll)x.size()
+
+#define SUBHAM_PAN ios_base::sync_with_stdio(false);cin.tie(0); cout.tie(0);
 
 // template<class T> 
 // using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistics_node_update> ;
@@ -56,6 +65,7 @@ const int mod = 1000000007; //1e9+7, comment it out if u want to use the other M
 
 void solve() {
       
+      
 
 
       // cout << "===========" << endl;    
@@ -63,7 +73,7 @@ void solve() {
 
 /*ngu, lesgo*/
 int32_t main() {
-      Hi_I_am_Subham_Pan
+      SUBHAM_PAN
       //cout<<fixed<<setprecision(20)<<x; //-> for printing a double 'x'.
 
       // freopen("", "r", stdin);
