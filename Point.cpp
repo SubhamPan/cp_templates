@@ -1,6 +1,12 @@
 // https://codeforces.com/contest/1860/submission/219298549 // jiangly using the template below to solve some 2900 question.
-
 // https://codeforces.com/contest/474/submission/267621336   // -> chatgpt helped me use the template below to solve this question. chat link: [https://chatgpt.com/share/c56b16f0-5206-4598-8eaa-645a7efc15bd] [pansubham3 google chrome account]
+
+
+// https://atcoder.jp/contests/abc426/submissions/69836615 -> hitonanode template
+// contains: ccw, Convex Hull (returns IDS of vertices used), whether point is on a line segment, Convex cut (cut convex polygon g by line p1->p2 and return the leftward one), 
+//           Intersect 2 circles, Intersect Cicle Line, Distance between point and Line, Distance between point and Line Segment, area of polygon.
+
+//--------------------------------------------------------------------
 
 // comment out #define double long double.
 // jiangly orz
