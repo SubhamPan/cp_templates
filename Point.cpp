@@ -12,86 +12,38 @@ struct Point {
     Point(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
     
     template<class U>
-    operator Point<U>() {
-        return Point<U>(U(x), U(y));
-    }
-    Point &operator+=(Point p) & {
-        x += p.x;
-        y += p.y;
-        return *this;
-    }
-    Point &operator-=(Point p) & {
-        x -= p.x;
-        y -= p.y;
-        return *this;
-    }
-    Point &operator*=(T v) & {
-        x *= v;
-        y *= v;
-        return *this;
-    }
-    Point &operator/=(T v) & {
-        x /= v;
-        y /= v;
-        return *this;
-    }
-    Point operator-() const {
-        return Point(-x, -y);
-    }
-    friend Point operator+(Point a, Point b) {
-        return a += b;
-    }
-    friend Point operator-(Point a, Point b) {
-        return a -= b;
-    }
-    friend Point operator*(Point a, T b) {
-        return a *= b;
-    }
-    friend Point operator/(Point a, T b) {
-        return a /= b;
-    }
-    friend Point operator*(T a, Point b) {
-        return b *= a;
-    }
-    friend bool operator==(Point a, Point b) {
-        return a.x == b.x && a.y == b.y;
-    }
-    friend std::istream &operator>>(std::istream &is, Point &p) {
-        return is >> p.x >> p.y;
-    }
-    friend std::ostream &operator<<(std::ostream &os, Point p) {
-        return os << "(" << p.x << ", " << p.y << ")";
-    }
+    operator Point<U>() {return Point<U>(U(x), U(y));}
+    Point &operator+=(Point p) & {x += p.x;y += p.y;return *this;}
+    Point &operator-=(Point p) & {x -= p.x;y -= p.y;return *this;}
+    Point &operator*=(T v) & {x *= v;y *= v;return *this;}
+    Point &operator/=(T v) & {x /= v;y /= v;return *this;}
+    Point operator-() const {return Point(-x, -y);}
+    friend Point operator+(Point a, Point b) {return a += b;}
+    friend Point operator-(Point a, Point b) {return a -= b;}
+    friend Point operator*(Point a, T b) {return a *= b;}
+    friend Point operator/(Point a, T b) {return a /= b;}
+    friend Point operator*(T a, Point b) {return b *= a;}
+    friend bool operator==(Point a, Point b) {return a.x == b.x && a.y == b.y;}
+    friend std::istream &operator>>(std::istream &is, Point &p) {return is >> p.x >> p.y;}
+    friend std::ostream &operator<<(std::ostream &os, Point p) {return os << "(" << p.x << ", " << p.y << ")";}
 };
  
 template<class T>
-T dot(Point<T> a, Point<T> b) {
-    return a.x * b.x + a.y * b.y;
-}
+T dot(Point<T> a, Point<T> b) {return a.x * b.x + a.y * b.y;}
  
 template<class T>
-T cross(Point<T> a, Point<T> b) {
-    return a.x * b.y - a.y * b.x;
-}
+T cross(Point<T> a, Point<T> b) {return a.x * b.y - a.y * b.x;}
  
 template<class T>
-T square(Point<T> p) {
-    return dot(p, p);
-}
+T square(Point<T> p) {return dot(p, p);}
  
 template<class T>
-double length(Point<T> p) {
-    return std::sqrt(double(square(p)));
-}
+double length(Point<T> p) {return std::sqrt(double(square(p)));}
  
-long double length(Point<long double> p) {
-    return std::sqrt(square(p));
-}
+long double length(Point<long double> p) {return std::sqrt(square(p));}
  
 template<class T>
-Point<T> normalize(Point<T> p) {
-    return p / length(p);
-}
+Point<T> normalize(Point<T> p) {return p / length(p);}
  
 template<class T>
 struct Line {
