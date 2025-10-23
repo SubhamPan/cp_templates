@@ -1,3 +1,25 @@
+class DSU {
+public:
+    int n; vector<int> p, sz;
+    DSU(int _n) : n(_n) {
+        p.resize(n); iota(p.begin(), p.end(), 0); 
+        sz.resize(n, 1);
+    }
+    int find(int x) { return (x == p[x] ? x : (p[x] = find(p[x]))); }
+    bool merge(int a, int b) {
+        int c = find(a); int d = find(b);
+        if(c == d) { return false; }
+        if(sz[c] < sz[d]) { swap(c,d); }
+        p[d] = c;sz[c] += sz[d];
+        return true;
+    }
+    bool isSame(int x, int y) {return find(x)==find(y);}
+    int getSize(int x) {return sz[find(x)];}
+};
+
+
+
+//================================================================================================================================
 // DSU dsu(n+1);
 class DSU {
 public:
