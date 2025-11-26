@@ -300,7 +300,7 @@ std::vector<Point<T>> hp(std::vector<Line<T>> lines) {
     }
     ps.push_back(lineIntersection(ls[0], ls.back()));
     
-    return std::vector<T>(ps.begin(), ps.end());
+    return std::vector(ps.begin(), ps.end());
 }
  
 using P = Point<i64>;
